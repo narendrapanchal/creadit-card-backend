@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 const publicRoutes = require('./routes/public');
+const cors = require('cors'); // Import cors middleware
+
+// Enable CORS for all routes
+app.use(cors());
+
 const app = express();
 
 // Middleware
