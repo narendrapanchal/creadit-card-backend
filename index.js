@@ -7,9 +7,9 @@ const publicRoutes = require('./routes/public');
 const cors = require('cors'); // Import cors middleware
 
 // Enable CORS for all routes
+const app = express();
 app.use(cors());
 
-const app = express();
 
 // Middleware
 app.use(express.json());
