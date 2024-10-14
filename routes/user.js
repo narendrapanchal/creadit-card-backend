@@ -9,9 +9,9 @@ router.post('/apply', async (req, res) => {
     const { cardId, personalInfo } = req.body;
     const newApplication = new Application({ cardId, personalInfo });
     await newApplication.save();
-    res.status(201).send('Application submitted');
+    res.status(201).send({message:'Application submitted'});
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).send({message:err.message});
   }
 });
 
@@ -21,7 +21,7 @@ router.get('/application/:id', async (req, res) => {
     const application = await Application.findById(req.params.id).populate('cardId');
     res.status(200).json(application);
   } catch (err) {
-    res.status(500).send('Server error');
+    res.status(500).send({message:err.message});
   }
 });
 

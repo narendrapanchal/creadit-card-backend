@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const applicationSchema = new mongoose.Schema({
   cardId: { type: mongoose.Schema.Types.ObjectId, ref: "card" },
-  status: { type: String, default: "pending" }, // pending, approved, rejected
+  status: { type: String, default: "pending", enum:["pending","approved","rejected"]}, // pending, approved, rejected
   personalInfo: {
     name: { type: String, required: true },
     income: { type: Number, required: true },

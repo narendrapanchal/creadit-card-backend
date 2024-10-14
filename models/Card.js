@@ -3,7 +3,7 @@ const cardSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
   name: { type: String, required: true },
   src:{type:String,required:true},
-  limit: { type: String, required: true },
+  limit: { type: Number, required: true },
   category: {
     type: String,
     required: true,
