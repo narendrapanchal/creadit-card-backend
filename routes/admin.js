@@ -76,5 +76,13 @@ router.put('/applications/:id',verify, async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-
+router.get('/applications/:id',verify, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const application = await Application.findOne({_id: id}).populate('cardId');
+    res.status(200).json(application);
+  } catch (err) {
+    res.status(500).send('Server error');
+  }
+});
 module.exports = router;

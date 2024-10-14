@@ -18,5 +18,17 @@ router.get('/cards', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+router.get('/cards/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Fetch the cards based on the query
+    const cards = await Card.findOne({_id:id});// Fetch all cards from the database
+    res.status(200).json(cards); // Send the cards in JSON format
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).send('Server error');
+  }
+});
 
 module.exports = router;
