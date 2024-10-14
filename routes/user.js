@@ -11,7 +11,7 @@ router.post('/apply', async (req, res) => {
     await newApplication.save();
     res.status(201).send({message:'Application submitted'});
   } catch (err) {
-    res.status(500).send({message:err.message});
+    res.status(500).send(err.message);
   }
 });
 
