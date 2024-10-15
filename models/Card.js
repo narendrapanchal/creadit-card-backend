@@ -35,7 +35,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: function (v) {
-        return v.length === 0 || v.every(pro => pro.length >= 5); // Minimum length for each pro
+        return v.length  >5; // Minimum length for each pro
       },
       message: 'Each pro must be at least 5 characters long.',
     },
@@ -44,7 +44,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: function (v) {
-        return v.length === 0 || v.every(con => con.length >= 5); // Minimum length for each con
+        return v.length > 5; // Minimum length for each con
       },
       message: 'Each con must be at least 5 characters long.',
     },

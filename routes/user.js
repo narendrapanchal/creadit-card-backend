@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Application = require('../models/Application.js');
+const { verify } = require('jsonwebtoken');
 
 // Apply for a credit card
 router.post('/apply', async (req, res) => {
@@ -16,7 +17,7 @@ router.post('/apply', async (req, res) => {
 });
 
 // View application status
-router.get('/application/:id', async (req, res) => {
+router.get('/application/:id',verify, async (req, res) => {
   try {
     const application = await Application.findById(req.params.id).populate('cardId');
     res.status(200).json(application);
