@@ -55,7 +55,6 @@ router.post('/register', async (req, res) => {
 
   router.post('/add-card',verify, async (req, res) => {
     try {
-      console.log(req.user)
       const newCard = new Card({...req.body,userId:req.user.id});
       await newCard.save();
       res.status(201).send({message:"Card added successfully."});
@@ -65,6 +64,23 @@ router.post('/register', async (req, res) => {
     }
   });
 
+
+  router.delete('/delete-card/:id',verify, async (req, res) => {
+    try {
+      await Card.findByIdAndDelete(req.params.id);
+      res.status(200).json({message:"Deleted successfully"});
+    } catch (err) {
+      res.status(500).send({message:err.message});
+    }
+  });
+  router.put('/edit-card/:id',verify, async (req, res) => {
+    try {
+      await Card.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      res.status(200).json({message:"update successfully."});
+    } catch (err) {
+      res.status(500).send({message:err.message});
+    }
+  });
 router.get('/applications',verify, async (req, res) => {
   try {
     const applications = await Application.find().populate('cardId');
