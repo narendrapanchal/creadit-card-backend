@@ -11,6 +11,16 @@ const verify = require('../middleware/verifyToken.js');
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).send({ message: 'Invalid email format.' });
+    }
+  
+    // Password length validation
+    if (password.length < 4) {
+      return res.status(400).send({ message: 'Password must be at least 4 characters long.' });
+    }
+  
     const user = await User.findOne({ email });
     if (!user) return res.status(404).send({message:'Admin not found.'});
 
@@ -37,6 +47,7 @@ router.post('/register', async (req, res) => {
     await user.save();
     res.status(201).json({message:"User created successfully."});
   } catch (err) {
+    console.log(err)
     res.status(500).send({message:err.message});
   }
 });
@@ -63,7 +74,6 @@ router.get('/applications',verify, async (req, res) => {
   }
 });
 
-// Approve/Reject an application
 router.put('/applications/:id',verify, async (req, res) => {
   try {
     const { status } = req.body;
@@ -79,7 +89,7 @@ router.get('/applications/:id',verify, async (req, res) => {
     const application = await Application.findOne({_id: id}).populate('cardId');
     res.status(200).json(application);
   } catch (err) {
-    res.status(500).send('Server error');
+    res.status(500).send({message: err.message});
   }
 });
 module.exports = router;

@@ -18,7 +18,7 @@ app.use("/admin", adminRoutes);
 app.use("/user", userRoutes);
 app.use("/public", publicRoutes);
 
-const PORT = 5000;
+const PORT =8000;
 app.listen(PORT, async () => {
   await mongoose.connect(
     "mongodb+srv://narendra1:narendra1@cluster0.fcwxv.mongodb.net/credit-card"
