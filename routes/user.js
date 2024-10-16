@@ -14,14 +14,14 @@ router.post('/apply', async (req, res) => {
   }
 });
 
-// View application status
-router.get('/application/:id',verify, async (req, res) => {
-  try {
-    const application = await Application.findById(req.params.id).populate('cardId');
-    res.status(200).json(application);
-  } catch (err) {
-    res.status(500).send({message:err.message});
-  }
-});
+// // View application status
+// router.get('/application/:id',verify, async (req, res) => {
+//   try {
+//     const application = await Application.findById(req.params.id).populate('cardId');
+//     res.status(200).json(application);
+//   } catch (err) {
+//     res.status(500).send({message:err.message});
+//   }
+// });
 
 module.exports = router;
