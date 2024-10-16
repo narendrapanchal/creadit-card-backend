@@ -82,7 +82,8 @@ router.post('/register', async (req, res) => {
       if(!card){
         throw new Error("Card not found.")
       }
-      await Card.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      await Card.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+
       res.status(200).json({message:"update successfully."});
     } catch (err) {
       res.status(500).send({message:err.message});
@@ -107,7 +108,7 @@ router.put('/applications/:id',verify, async (req, res) => {
         throw new Error("Only pending applications can be updated.");
       }
     const { status } = req.body;
-    await Application.findByIdAndUpdate(req.params.id, { status }, { new: true });
+    await Application.findByIdAndUpdate(req.params.id, { status }, { new: true,runValidators: true });
     res.status(200).json({message:"update successfully."});
   } catch (err) {
     res.status(500).send({message:err.message});

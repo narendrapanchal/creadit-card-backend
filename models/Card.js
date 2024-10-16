@@ -11,7 +11,8 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: function (v) {
-        return /^https?:\/\/.*\.(jpg|jpeg|png|gif)$/.test(v); // Regex for image URL validation
+        console.log("v-----",v)
+        return /^https?:\/\/.*\.(jpg|jpeg|png|gif)$/.test(v.trim());
       },
       message: 'Source must be a valid image URL.',
     },
