@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const Card = require('../models/Card.js');
 const Application = require('../models/Application');
 const User = require('../models/User.js');
@@ -67,6 +66,10 @@ router.post('/register', async (req, res) => {
 
   router.delete('/delete-card/:id',verify, async (req, res) => {
     try {
+      const card=await Card.findById(req.params.id);
+      if(!card){
+        throw new Error("Card not found.")
+      }
       await Card.findByIdAndDelete(req.params.id);
       res.status(200).json({message:"Deleted successfully"});
     } catch (err) {
@@ -75,6 +78,10 @@ router.post('/register', async (req, res) => {
   });
   router.put('/edit-card/:id',verify, async (req, res) => {
     try {
+      const card=await Card.findById(req.params.id);
+      if(!card){
+        throw new Error("Card not found.")
+      }
       await Card.findByIdAndUpdate(req.params.id, req.body, { new: true });
       res.status(200).json({message:"update successfully."});
     } catch (err) {
@@ -92,8 +99,15 @@ router.get('/applications',verify, async (req, res) => {
 
 router.put('/applications/:id',verify, async (req, res) => {
   try {
+    const application=await Application.findById(req.params.id);
+      if(!application){
+        throw new Error("Application not found.")
+      }
+      if(application.status!="pending"){
+        throw new Error("Only pending applications can be updated.");
+      }
     const { status } = req.body;
-    const application = await Application.findByIdAndUpdate(req.params.id, { status }, { new: true });
+    await Application.findByIdAndUpdate(req.params.id, { status }, { new: true });
     res.status(200).json({message:"update successfully."});
   } catch (err) {
     res.status(500).send({message:err.message});

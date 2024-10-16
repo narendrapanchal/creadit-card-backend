@@ -1,10 +1,8 @@
-// routes/user.js
 const express = require('express');
 const router = express.Router();
 const Application = require('../models/Application.js');
 const { verify } = require('jsonwebtoken');
 
-// Apply for a credit card
 router.post('/apply', async (req, res) => {
   try {
     const { cardId, personalInfo } = req.body;
