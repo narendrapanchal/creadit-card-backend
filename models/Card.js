@@ -50,6 +50,10 @@ const cardSchema = new mongoose.Schema({
       message: 'Each con must be at least 5 characters long.',
     },
   }],
+},
+{
+  timestamps: true,
+  versionKey: false,
 });
 module.exports = mongoose.model('card', cardSchema);
 

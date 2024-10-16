@@ -78,6 +78,9 @@ const applicationSchema = new mongoose.Schema({
       }
     },
   },
+},{
+  timestamps: true,
+  versionKey: false,
 });
 module.exports = mongoose.model("application", applicationSchema);
 

@@ -4,7 +4,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "jest": {
+      "testMatch": [
+        "**/tests/**/*.test.js"
+      ]
+    }
   },
   "keywords": [],
   "author": "",
@@ -17,6 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwt-simple": "^0.5.6",
     "mongoose": "^8.7.1",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "supertest": "^7.0.0"
   }
 }

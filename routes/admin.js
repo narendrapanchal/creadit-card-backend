@@ -91,7 +91,7 @@ router.post('/register', async (req, res) => {
   });
 router.get('/applications',verify, async (req, res) => {
   try {
-    const applications = await Application.find().populate('cardId');
+    const applications = await Application.find().populate('cardId').sort({ createdAt: -1 });
     res.status(200).json(applications);
   } catch (err) {
     res.status(500).send({message:err.message});
