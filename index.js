@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+const port = process.env.PORT || 8000;
+const dbUrl = process.env.DATABASE_URL;
 const express = require("express");
 const mongoose = require("mongoose");
 const adminRoutes = require("./routes/admin");
@@ -17,9 +21,6 @@ app.use("/admin", adminRoutes);
 app.use("/user", userRoutes);
 app.use("/public", publicRoutes);
 
-const PORT =8000;
-app.listen(PORT, async () => {
-  await mongoose.connect(
-    "mongodb+srv://narendra1:narendra1@cluster0.fcwxv.mongodb.net/credit-card"
-  );
+app.listen(port, async () => {
+  await mongoose.connect(dbUrl);
 });

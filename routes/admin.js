@@ -5,6 +5,7 @@ const Card = require('../models/Card.js');
 const Application = require('../models/Application');
 const User = require('../models/User.js');
 const verify = require('../middleware/verifyToken.js');
+const secretKey = process.env.SECRETE_KEY;
 
 // Admin login route
 router.post('/login', async (req, res) => {
@@ -26,7 +27,7 @@ router.post('/login', async (req, res) => {
     const isMatch = await user.checkPassword(password);
     if (!isMatch) return res.status(400).send({message:'Invalid credentials.'});
 
-    const token = jwt.sign({ id: user._id }, 'secretKey', { expiresIn: '1d' });
+    const token = jwt.sign({ id: user._id }, secretKey, { expiresIn: '1d' });
     res.status(200).json({ token });
   } catch (err) {
     res.status(500).send({message:err.message});

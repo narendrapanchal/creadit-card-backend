@@ -1,4 +1,5 @@
-const backend_url = "http://localhost:8000";
+require('dotenv').config();
+const backend_url = process.env.BACKEND_URL;
 const axios = require("axios");
 
 describe("Post /admin/login/", () => {

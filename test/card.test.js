@@ -1,5 +1,6 @@
 //https://medium.com/@ben.dev.io/node-js-unit-testing-with-jest-b7042d7c2ad0
-const backend_url = "http://localhost:8000";
+require('dotenv').config();
+const backend_url = process.env.BACKEND_URL;
 // "https://credit-card-backend-hy1u.onrender.com";
 const axios = require("axios");
 let cardId; // Variable to store the card ID
