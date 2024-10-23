@@ -71,6 +71,7 @@ router.post('/register', async (req, res) => {
       if(!card){
         throw new Error("Card not found.")
       }
+      await Application.deleteMany({ cardId: req.params.id });
       await Card.findByIdAndDelete(req.params.id);
       res.status(200).json({message:"Deleted successfully"});
     } catch (err) {
