@@ -59,7 +59,7 @@ router.post('/register', async (req, res) => {
       await newCard.save();
       res.status(201).send({message:"Card added successfully."});
     } catch (err) {
-      console.log(err)
+      console.log("err.message---",err.message)
       res.status(500).send({message:err.message});
     }
   });
