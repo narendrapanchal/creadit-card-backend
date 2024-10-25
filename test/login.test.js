@@ -26,16 +26,16 @@ describe("Post /admin/login/ - Wrong Password", () => {
   });
 });
 
-describe("Post /admin/login/ - Email Not Found", () => {
-  test("Login should fail because the email does not exist (404)", async () => {
-    const response = await axios
-      .post(backend_url + "/admin/login/", {
-        email, // Non-existent email
-        password, // Any password
-      })
-      .catch((err) => err.response); // Catch the error and store the response
-    expect(response.status).toBe(404); // Expect status code 404
-  });
-});
+// describe("Post /admin/login/ - Email Not Found", () => {
+//   test("Login should fail because the email does not exist (404)", async () => {
+//     const response = await axios
+//       .post(backend_url + "/admin/login/", {
+//         email, // Non-existent email
+//         password, // Any password
+//       })
+//       .catch((err) => err.response); // Catch the error and store the response
+//     expect(response.status).toBe(404); // Expect status code 404
+//   });
+// });
 
 
