@@ -86,7 +86,7 @@ router.post('/register', async (req, res) => {
       }
       await Card.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
 
-      res.status(200).json({message:"update successfully."});
+      res.status(200).json({message:"updated successfully."});
     } catch (err) {
       res.status(500).send({message:err.message});
     }

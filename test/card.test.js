@@ -1,6 +1,8 @@
 //https://medium.com/@ben.dev.io/node-js-unit-testing-with-jest-b7042d7c2ad0
 require('dotenv').config();
 const backend_url = process.env.BACKEND_URL;
+const email = process.env.EMAIL;
+const password = process.env.PASSWORD;
 // "https://credit-card-backend-hy1u.onrender.com";
 const axios = require("axios");
 let cardId; // Variable to store the card ID
@@ -13,8 +15,8 @@ describe("GET /public/cards", () => {
     response = await axios.get(backend_url + "/public/cards");
     cardId = response.data[0]._id; // Store the ID of the first card
     loginResponse = await axios.post(backend_url + "/admin/login/", {
-      email: "narendrapanchal020@gmail.com",
-      password: "123456",
+      email,
+      password,
     });
     token = loginResponse.data.token;
   });
